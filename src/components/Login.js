@@ -11,22 +11,8 @@ class Login extends React.Component {
     };
   }
 
-  //*ignore using below as a template for now until i get api*
-  //  SubmitButton = (e) => {
-  //     e.preventDefault();
-  //     console.log(this.state)
-  //     axios
-  //       .post(`http://localhost:5000/api/login`, this.state)
-  //       .then((response) => {
-  //         console.log(response)
-  //         localStorage.setItem("token", response.data.payload);
-  //         this.props.history.push("/protected");
-  //         console.log(response);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   };
+
+
 
   handleNameChanges = (e) => {
     e.preventDefault();
@@ -60,7 +46,6 @@ class Login extends React.Component {
             />
           </label>
 
-          {/* ignore for now <button  onClick={this.SubmitButton}>Submit</button> */}
         </form>
       </>
     );
