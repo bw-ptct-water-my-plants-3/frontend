@@ -1,0 +1,25 @@
+.background{
+    background-image: url("../img/plantimage.jpg");
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+}
+
+.form-background{
+    background-color:white;
+    height: 70px;
+    width: 400px;
+    display: flex;
+ margin:auto;
+    align-items: center;
+    justify-content: center;
+    margin-top:0;
+    margin-right: 330px;
+    
+}
+
+.home{
+    margin-left: 490px;
+}
