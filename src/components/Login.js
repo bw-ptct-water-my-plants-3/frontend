@@ -1,5 +1,7 @@
 import React from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./Login.css";
+import { Button } from "reactstrap";
 
 class Login extends React.Component {
   constructor(props) {
@@ -10,9 +12,6 @@ class Login extends React.Component {
       password: "",
     };
   }
-
-
-
 
   handleNameChanges = (e) => {
     e.preventDefault();
@@ -25,9 +24,13 @@ class Login extends React.Component {
   };
   render() {
     return (
-      <>
-       <Link to="/">Home</Link>
-        <form>
+      <div class="background">
+        <div class="home">
+          <Link to="/">
+            <Button color="success">Home</Button>
+          </Link>
+        </div>
+        <form class="form-background">
           <label>
             Name:
             <input
@@ -45,9 +48,8 @@ class Login extends React.Component {
               onChange={this.handlePassChanges}
             />
           </label>
-
         </form>
-      </>
+      </div>
     );
   }
 }
