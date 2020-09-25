@@ -1,4 +1,5 @@
 import axios from "axios";
+import { axiosWithAuth } from "../utils/axioswithauth";
 
 export const FETCHING_GET_PLANT = 'FETCHING_GET_PLANT';
 export const FETCHING_GET_PLANT_SUCESS = 'FETCHING_GET_PLANT_SUCESS';
@@ -24,10 +25,10 @@ export const REGISTER_ERROR = 'REGISTER_ERROR'
 const headers = {
     Accept: "application/json"
   };
-export const getPlant = () => dispatch => {
+export const getPlant = (userid) => dispatch => {
     dispatch({ type: FETCHING_GET_PLANT });
     axios
-      .get("https://swapi.dev/api/people/", { headers })
+      .axiosWithAuth().get(`/users/${userid}/`, { headers })
       .then(res => {
         console.log(res);
         dispatch({ type: FETCHING_GET_PLANT_SUCESS, payload: res.data.results });
@@ -38,10 +39,10 @@ export const getPlant = () => dispatch => {
       });
   };
 
-  export const updatePlant = () => dispatch => {
+  export const updatePlant = (userid,plantid) => dispatch => {
     dispatch({ type: FETCHING_UPDATE_PLANT });
     axios
-      .get("https://swapi.dev/api/people/", { headers })
+      .axiosWithAuth().put(`/users/${userid}/plants/${plantid}`, { headers })
       .then(res => {
         console.log(res);
         dispatch({ type: FETCHING_UPDATE_PLANT_SUCESS, payload: res.data.results });
@@ -54,10 +55,10 @@ export const getPlant = () => dispatch => {
   };
 
 
-  export const removePlant = () => dispatch => {
+  export const removePlant = (userid,plantid) => dispatch => {
     dispatch({ type: FETCHING_REMOVE_PLANT });
     axios
-      .get("https://swapi.dev/api/people/", { headers })
+     .axiosWithAuth().delete(`/users/${userid}/plants/${plantid}`, { headers })
       .then(res => {
         console.log(res);
         dispatch({ type: FETCHING_REMOVE_PLANT_SUCESS, payload: res.data.results });
@@ -84,10 +85,10 @@ export const getPlant = () => dispatch => {
       });
 };
   
-export const register = () => dispatch => {
+export const register = (state) => dispatch => {
     dispatch({ type: REGISTER });
     axios
-      .get("https://swapi.dev/api/people/", { headers })
+      .post("http://localhost:5000/auth/register", { headers, data:state })
       .then(res => {
         console.log(res);
         dispatch({ type: REGISTER_SUCESS, payload: res.data.results });

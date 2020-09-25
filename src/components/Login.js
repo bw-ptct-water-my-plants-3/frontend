@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "./Login.css";
 import { Button } from "reactstrap";
 
+import { register } from "./Actions/actions"
+
 class Login extends React.Component {
   constructor(props) {
     super();
@@ -10,6 +12,7 @@ class Login extends React.Component {
     this.state = {
       username: "",
       password: "",
+      phoneNumber:"",
     };
   }
 
@@ -22,6 +25,18 @@ class Login extends React.Component {
     e.preventDefault();
     this.setState({ password: e.target.value });
   };
+
+  handlePhoneChanges = (e) => {
+    e.preventDefault();
+    this.setState({ phoneNumber: e.target.value });
+  };
+
+  SubmitButton = (e) => {
+    e.preventDefault();
+    console.log(this.state)
+    register(this.state)
+  };
+
   render() {
     return (
       <div class="background">
@@ -48,6 +63,14 @@ class Login extends React.Component {
               onChange={this.handlePassChanges}
             />
           </label>
+          <label>
+              Phone number:
+            <input name="phoneNumber" value={this.state.phoneNumber}
+              onChange={this.handlePhoneChanges} />
+          </label>
+
+          <button  onClick={this.SubmitButton}>Submit</button>
+
         </form>
       </div>
     );
