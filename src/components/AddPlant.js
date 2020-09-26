@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button } from "reactstrap";
 
 const AddPlant = () => {
   const [plant, setPlant] = useState({
@@ -10,14 +11,11 @@ const AddPlant = () => {
   const handleChange = (e) => {
     e.preventDefault();
     console.log(e.target.value);
-    setPlant({
-        nickName: e.target.value,
-        species: e.target.value,
-        h2oFrequency: e.target.value,
-    });
-};
+    setPlant({ ...plant, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
+    console.log(plant)
     e.preventDefault();
     alert("submitted plant");
   };
@@ -25,7 +23,7 @@ const AddPlant = () => {
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        value={plant.nickName}
+        
         placeholder="Nickname"
         name="nickName"
         onChange={handleChange}
@@ -44,7 +42,7 @@ const AddPlant = () => {
         name="h2oFrequency"
         onChange={handleChange}
       />
-      <input type="submit" value="Submit" />
+      <Button color="success">SUBMIT</Button>
     </form>
   );
 };
