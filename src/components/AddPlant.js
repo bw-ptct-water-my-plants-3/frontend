@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 
 const AddPlant = () => {
-  const [plant, setPlant] = useState({});
+  const [plant, setPlant] = useState({
+      nickName:"",
+      species:"",
+      h2oFrequency:""
+  });
+
+const handleChange = (e) => {
+    e.preventDefault();
+
+}
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -9,9 +18,9 @@ const AddPlant = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" value="nickname" placeholder="Nickname" />
-      <input type="text" value="species" placeholder="Species" />
-      <input type="number" value="H2O Frequency" placeholder="H2O Frequency" />
+      <input type="text" value={plant.nickName} placeholder="Nickname" name="nickName"/>
+      <input type="text" value={plant.species} placeholder="Species" name="species"/>
+      <input type="number" value={plant.h2oFrequency} placeholder="H2O Frequency" name="h2oFrequency" />
       <input type="submit" value="Submit" />
     </form>
   );
