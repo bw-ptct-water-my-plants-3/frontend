@@ -3,6 +3,7 @@ import './App.css';
 import Home from "./components/Home"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from './components/Login';
+import AddPlant from './components/AddPlant';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             
             <Route path="/" exact component={Home} />
             <Route path="/login" component={Login}/>
+            <Route path="/plantform" component={AddPlant}/>
              
           </Switch>
   
