@@ -70,3 +70,7 @@ body {
   color: unset;
   text-decoration: none;
 }
+
+.text-green {
+  color: green;
+}

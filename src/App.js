@@ -16,6 +16,7 @@ import Login from './components/Login';
 import RegisterUser from './components/RegisterUser';
 import AddPlant from './components/AddPlant';
 import PlantDashboard from './components/PlantDashboard';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,11 +53,12 @@ function App() {
         </Navbar>
 
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={RegisterUser} />
-          <Route path="/plants/new" component={AddPlant} />
-          <Route path="/plants" component={PlantDashboard} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={RegisterUser} />
+          <PrivateRoute exact path="/plants" component={PlantDashboard} />
+          <PrivateRoute exact path="/plants/new" component={AddPlant} />
+          <PrivateRoute exact path="/plants/edit/:id" component={AddPlant} />
         </Switch>
       </Router>
     </div>
