@@ -1,12 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import { Button, Card, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class Login extends React.Component {
-  constructor(props) {
+  constructor() {
     super();
-    console.log(props);
     this.state = {
       username: '',
       password: '',
@@ -17,11 +15,15 @@ class Login extends React.Component {
     this.setState({ ...this.state, [e.target.name]: e.target.value });
   };
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   render() {
     return (
       <section className="flex-center">
         <Card className="padding">
-          <Form>
+          <Form onSubmit={this.handleSubmit}>
             <FormGroup>
               <Label for="username" hidden>
                 Username
@@ -49,9 +51,11 @@ class Login extends React.Component {
               />
             </FormGroup>
             <div className="flex-center-x">
-              <Button className="gap-x">Login</Button>
+              <Button color="success" type="submit" className="gap-x">
+                Login
+              </Button>
               <Link className="gap-x" to="/register">
-                <Button>Register</Button>
+                <Button type="button">Register</Button>
               </Link>
             </div>
           </Form>

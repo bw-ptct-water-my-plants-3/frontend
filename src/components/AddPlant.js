@@ -9,16 +9,13 @@ const AddPlant = () => {
   });
 
   const handleChange = (e) => {
-    e.preventDefault();
-    console.log(e.target.value);
     setPlant({ ...plant, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
-    console.log(plant);
     e.preventDefault();
-    alert('submitted plant');
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <input
