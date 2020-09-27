@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'reactstrap';
 
 const RegisterUser = () => {
@@ -28,7 +28,7 @@ const RegisterUser = () => {
           type="text"
           placeholder="Username"
           name="username"
-          onchange={handleChange}
+          onChange={handleChange}
         />
         <input
           type="text"
