@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Button } from "reactstrap";
+import React, { useState } from 'react';
+import { Button } from 'reactstrap';
 
 const AddPlant = () => {
   const [plant, setPlant] = useState({
-    nickName: "",
-    species: "",
-    h2oFrequency: "",
+    nickName: '',
+    species: '',
+    h2oFrequency: '',
   });
 
   const handleChange = (e) => {
@@ -15,15 +15,14 @@ const AddPlant = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log(plant)
+    console.log(plant);
     e.preventDefault();
-    alert("submitted plant");
+    alert('submitted plant');
   };
   return (
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        
         placeholder="Nickname"
         name="nickName"
         onChange={handleChange}
