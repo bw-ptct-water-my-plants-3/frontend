@@ -1,15 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./Login.css";
-import { Button } from "reactstrap";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './Login.css';
+import { Button } from 'reactstrap';
 
 class Login extends React.Component {
   constructor(props) {
     super();
     console.log(props);
     this.state = {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
     };
   }
 

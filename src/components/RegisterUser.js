@@ -1,11 +1,11 @@
-import React from "react";
-import { Button } from "reactstrap";
+import React from 'react';
+import { Button } from 'reactstrap';
 
 const RegisterUser = () => {
   const [register, setRegister] = useState({
-    username: "",
-    password: "",
-    phoneNumber: "",
+    username: '',
+    password: '',
+    phoneNumber: '',
   });
 
   const handleChange = (e) => {
@@ -17,7 +17,7 @@ const RegisterUser = () => {
   const handleSubmit = (e) => {
     console.log(register);
     e.preventDefault();
-    alert("Thank you for registering!");
+    alert('Thank you for registering!');
   };
 
   return (
