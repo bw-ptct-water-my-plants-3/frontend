@@ -1,33 +1,18 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import { Button } from 'reactstrap';
+import { connect } from 'react-redux';
+import { updatePlant, addPlant } from './Actions/actions';
+import { useHistory } from 'react-router-dom';
 
-const plantsList = [
-  {
-    id: 1,
-    user_id: 1,
-    nickname: 'Sunflower',
-    species: 'Annualforbof',
-    h2oFrequency: 2,
-    image:
-      'https://upload.wikimedia.org/wikipedia/commons/a/a9/A_sunflower.jpg',
-  },
-  {
-    id: 2,
-    user_id: 2,
-    nickname: 'Tulips',
-    species: 'Liliaceae',
-    h2oFrequency: 4,
-    image:
-      'https://s-media-cache-ak0.pinimg.com/736x/b4/c7/16/b4c716ddface1a7ef8f6c54151c15def.jpg',
-  },
-];
 
-export default () => {
+const AddPlant = (props) => {
+  const history = useHistory();
+
   const { id } = useParams();
   const isEditing = !!id;
   const [plant, setPlant] = useState(() => {
-    const existingPlant = plantsList.find((plant) => plant.id === Number(id));
+    const existingPlant = props.plants.find((plant) => plant.id === Number(id));
     return (
       existingPlant ?? {
         nickname: '',
@@ -45,8 +30,14 @@ export default () => {
     e.preventDefault();
     if (isEditing) {
       console.log('edit', plant);
+      props.updatePlant(plant).then((plant)=>{
+      history.push('/plants')
+      })
     } else {
       console.log('new', plant);
+      props.addPlant(plant).then((plant)=>{
+        history.push('/plants')
+      })
     }
   };
 
@@ -79,3 +70,11 @@ export default () => {
     </form>
   );
 };
+
+const mapStateToProps = state => {
+  return {
+    plants: state.plants
+  };
+};
+
+export default connect(mapStateToProps, { updatePlant, addPlant })(AddPlant);

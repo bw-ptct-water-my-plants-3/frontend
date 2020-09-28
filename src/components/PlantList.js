@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardImg,
@@ -8,32 +8,23 @@ import {
   CardSubtitle,
   Button,
 } from 'reactstrap';
+import { connect } from 'react-redux';
+import { getPlants, removePlant } from './Actions/actions';
+import { Link} from 'react-router-dom';
 
-export default (props) => {
-  const [plants] = useState([
-    {
-      id: 1,
-      user_id: 1,
-      nickname: 'Sunflower',
-      species: 'Annualforbof',
-      h2oFrequency: 2,
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/a/a9/A_sunflower.jpg',
-    },
-    {
-      id: 2,
-      user_id: 2,
-      nickname: 'Tulips',
-      species: 'Liliaceae',
-      h2oFrequency: 4,
-      image:
-        'https://s-media-cache-ak0.pinimg.com/736x/b4/c7/16/b4c716ddface1a7ef8f6c54151c15def.jpg',
-    },
-  ]);
+const PlantList =  (props) => {
 
+  useEffect(() => {
+    props.getPlants();
+  }, []);
+
+
+  const deletePlant = (plant) => {
+    props.removePlant(plant)
+  }
   return (
     <section className={props.className + ' grid'}>
-      {plants.map((plant) => (
+      {props.plants.map((plant) => (
         <Card key={plant.id}>
           <CardImg
             top
@@ -47,11 +38,24 @@ export default (props) => {
             <CardTitle>{plant.nickname}</CardTitle>
             <CardSubtitle>{plant.species}</CardSubtitle>
             <CardText>Needs water every {plant.h2oFrequency} hours</CardText>
-            <Button className="gap">Edit</Button>
-            <Button className="gap-x">Delete</Button>
+            <Link to={'/plants/edit/' + plant.id}>
+              <Button className="gap">Edit</Button>
+            </Link>
+            <Button onClick={(e) => {
+              e.preventDefault();
+              deletePlant(plant)
+            }} className="gap-x">Delete</Button>
           </CardBody>
         </Card>
       ))}
     </section>
   );
 };
+
+const mapStateToProps = state => {
+  return {
+    plants: state.plants
+  };
+};
+
+export default connect(mapStateToProps, { getPlants, removePlant })(PlantList);

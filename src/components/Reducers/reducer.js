@@ -3,7 +3,7 @@ const initialState = {
 };
 export const appReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'GET_PLANTS':
+    case 'FETCHING_GET_PLANT_SUCESS':
       return {
         ...state,
         plants: [...action.payload],
