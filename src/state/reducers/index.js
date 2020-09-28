@@ -3,6 +3,7 @@ import {
   UPDATE_PLANT_SUCCESS,
   REMOVE_PLANT_SUCCESS,
   LOGIN_SUCCESS,
+  LOGOUT,
 } from '../actions';
 
 const initialState = {
@@ -42,6 +43,9 @@ export const appReducer = (state = initialState, action) => {
 
     case LOGIN_SUCCESS:
       return { ...state, user_id: action.payload.userid };
+
+    case LOGOUT:
+      return { ...state, user_id: null };
 
     default:
       return state;

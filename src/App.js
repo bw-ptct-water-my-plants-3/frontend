@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import {
   Button,
   Collapse,
@@ -7,7 +8,6 @@ import {
   NavbarToggler,
   Nav,
   NavItem,
-  NavLink,
 } from 'reactstrap';
 
 import Home from './components/Home';
@@ -17,10 +17,15 @@ import RegisterUser from './components/RegisterUser';
 import AddPlant from './components/AddPlant';
 import PlantDashboard from './components/PlantDashboard';
 import PrivateRoute from './components/PrivateRoute';
+import { logout } from './state/actions';
 
-function App() {
+function App(props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [loggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setLoggedIn(!!props?.user?.user_id);
+  }, [props]);
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -36,14 +41,12 @@ function App() {
             <Nav className="mr-auto" navbar>
               {loggedIn && (
                 <NavItem>
-                  <NavLink>
-                    <Link to="/plants">Your Plants</Link>
-                  </NavLink>
+                  <Link to="/plants">Your Plants</Link>
                 </NavItem>
               )}
             </Nav>
             {loggedIn ? (
-              <Button>Logout</Button>
+              <Button onClick={props.logout}>Logout</Button>
             ) : (
               <Link to="/login">
                 <Button>Login</Button>{' '}
@@ -65,4 +68,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps, { logout })(App);

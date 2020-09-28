@@ -25,7 +25,7 @@ export const REGISTER = 'REGISTER';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_ERROR = 'REGISTER_ERROR';
 
-const user_id = localStorage.getItem('user_id');
+export const LOGOUT = 'LOGOUT';
 
 export const addPlant = (user_id, state) => (dispatch) => {
   dispatch({ type: ADD_PLANT });
@@ -128,4 +128,10 @@ export const register = (state) => (dispatch) => {
       console.log(err);
       dispatch({ type: REGISTER_ERROR, payload: err });
     });
+};
+
+export const logout = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
+  localStorage.removeItem('token');
+  localStorage.removeItem('user_id');
 };

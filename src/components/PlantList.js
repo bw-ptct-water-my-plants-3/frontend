@@ -13,9 +13,11 @@ import { getPlants, removePlant } from '../state/actions';
 import { Link } from 'react-router-dom';
 
 const PlantList = (props) => {
+  const { getPlants, user } = props;
+
   useEffect(() => {
-    props.getPlants(props.user.user_id);
-  }, []);
+    getPlants(user.user_id);
+  }, [user, getPlants]);
 
   const deletePlant = (plant) => {
     props.removePlant(props.user.user_id, plant);
