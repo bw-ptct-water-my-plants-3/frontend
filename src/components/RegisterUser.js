@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, Form, FormGroup, Label, Input } from 'reactstrap';
-import {register} from "./Actions/actions"
+import { register } from '../state/actions';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-
-
 
 const RegisterUser = (props) => {
   const [state, setState] = useState({
@@ -19,14 +17,10 @@ const RegisterUser = (props) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
-const registerfunc = (e) =>{
-  e.preventDefault();
-props.register(state)
-history.push('/login');
-}
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    props.register(state);
+    history.push('/login');
   };
 
   return (
@@ -73,7 +67,7 @@ history.push('/login');
             />
           </FormGroup>
           <div className="flex-center-x">
-            <Button onClick={registerfunc}color="success" type="submit" className="gap-x">
+            <Button color="success" type="submit" className="gap-x">
               Register
             </Button>
             <Link className="gap-x" to="/login">
@@ -86,8 +80,4 @@ history.push('/login');
   );
 };
 
-
-export default connect(
-  null,
-  { register }
-)(RegisterUser);
+export default connect(null, { register })(RegisterUser);

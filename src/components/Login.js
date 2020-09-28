@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, Form, FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { login } from './Actions/actions';
+import { login } from '../state/actions';
 import { useHistory } from 'react-router-dom';
 
 const Login = (props) => {
@@ -18,10 +18,6 @@ const Login = (props) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  const loginfunc = (e) => {
     e.preventDefault();
     props.login(state).then(() => {
       history.push('/plants');
@@ -59,12 +55,7 @@ const Login = (props) => {
             />
           </FormGroup>
           <div className="flex-center-x">
-            <Button
-              onClick={loginfunc}
-              color="success"
-              type="submit"
-              className="gap-x"
-            >
+            <Button color="success" type="submit" className="gap-x">
               Login
             </Button>
             <Link className="gap-x" to="/register">

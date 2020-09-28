@@ -1,4 +1,4 @@
-import React, {useEffect } from "react";
+import React, { useEffect } from 'react';
 import {
   Card,
   CardImg,
@@ -9,19 +9,18 @@ import {
   Button,
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { getPlants, removePlant } from './Actions/actions';
-import { Link} from 'react-router-dom';
+import { getPlants, removePlant } from '../state/actions';
+import { Link } from 'react-router-dom';
 
-const PlantList =  (props) => {
-
+const PlantList = (props) => {
   useEffect(() => {
-    props.getPlants();
-  });
-
+    props.getPlants(props.user.user_id);
+  }, []);
 
   const deletePlant = (plant) => {
-    props.removePlant(plant)
-  }
+    props.removePlant(props.user.user_id, plant);
+  };
+
   return (
     <section className={props.className + ' grid'}>
       {props.plants.map((plant) => (
@@ -41,10 +40,15 @@ const PlantList =  (props) => {
             <Link to={'/plants/edit/' + plant.id}>
               <Button className="gap">Edit</Button>
             </Link>
-            <Button onClick={(e) => {
-              e.preventDefault();
-              deletePlant(plant)
-            }} className="gap-x">Delete</Button>
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                deletePlant(plant);
+              }}
+              className="gap-x"
+            >
+              Delete
+            </Button>
           </CardBody>
         </Card>
       ))}
@@ -52,9 +56,10 @@ const PlantList =  (props) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    plants: state.plants
+    plants: state.plants,
+    user: state.user,
   };
 };
 

@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { appReducer } from './components/Reducers/reducer';
+import { appReducer } from './state/reducers';
 
 const store = createStore(appReducer, applyMiddleware(logger, thunk));
 ReactDOM.render(

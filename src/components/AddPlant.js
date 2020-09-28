@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import { Button } from 'reactstrap';
 import { connect } from 'react-redux';
-import { updatePlant, addPlant } from './Actions/actions';
+import { updatePlant, addPlant } from '../state/actions';
 import { useHistory } from 'react-router-dom';
-
 
 const AddPlant = (props) => {
   const history = useHistory();
@@ -30,14 +29,14 @@ const AddPlant = (props) => {
     e.preventDefault();
     if (isEditing) {
       console.log('edit', plant);
-      props.updatePlant(plant).then((plant)=>{
-      history.push('/plants')
-      })
+      props.updatePlant(props.user.user_id, plant).then(() => {
+        history.push('/plants');
+      });
     } else {
       console.log('new', plant);
-      props.addPlant(plant).then((plant)=>{
-        history.push('/plants')
-      })
+      props.addPlant(props.user.user_id, plant).then(() => {
+        history.push('/plants');
+      });
     }
   };
 
@@ -71,9 +70,10 @@ const AddPlant = (props) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    plants: state.plants
+    plants: state.plants,
+    user: state.user,
   };
 };
 
