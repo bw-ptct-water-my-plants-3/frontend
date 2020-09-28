@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import {
   Card,
   CardImg,
@@ -16,7 +16,7 @@ const PlantList =  (props) => {
 
   useEffect(() => {
     props.getPlants();
-  }, []);
+  });
 
 
   const deletePlant = (plant) => {

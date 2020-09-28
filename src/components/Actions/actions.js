@@ -27,9 +27,6 @@ export const REGISTER_ERROR = 'REGISTER_ERROR';
 
 const user_id = localStorage.getItem("user_id");
 
-const headers = {
-  Accept: 'application/json',
-};
 export const addPlant = (state) => (dispatch) => {
   dispatch({ type: FETCHING_ADD_PLANT });
     return axiosWithAuth().post(`/users/${user_id}/plants/`, state )
