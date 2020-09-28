@@ -1,68 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, Form, FormGroup, Label, Input } from 'reactstrap';
+import { connect } from 'react-redux';
+import { login } from '../state/actions';
+import { useHistory } from 'react-router-dom';
 
-class Login extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      username: '',
-      password: '',
-    };
-  }
+const Login = (props) => {
+  const history = useHistory();
 
-  handleChanges = (e) => {
-    this.setState({ ...this.state, [e.target.name]: e.target.value });
+  const [state, setState] = useState({
+    username: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    props.login(state).then(() => {
+      history.push('/plants');
+    });
   };
 
-  render() {
-    return (
-      <section className="flex-center">
-        <Card className="padding">
-          <Form onSubmit={this.handleSubmit}>
-            <FormGroup>
-              <Label for="username" hidden>
-                Username
-              </Label>
-              <Input
-                type="username"
-                name="username"
-                id="username"
-                placeholder="Username"
-                value={this.state.username}
-                onChange={this.handleChanges}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="password" hidden>
-                Password
-              </Label>
-              <Input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-                value={this.state.password}
-                onChange={this.handleChanges}
-              />
-            </FormGroup>
-            <div className="flex-center-x">
-              <Button color="success" type="submit" className="gap-x">
-                Login
-              </Button>
-              <Link className="gap-x" to="/register">
-                <Button type="button">Register</Button>
-              </Link>
-            </div>
-          </Form>
-        </Card>
-      </section>
-    );
-  }
-}
+  return (
+    <section className="flex-center">
+      <Card className="padding">
+        <Form onSubmit={handleSubmit}>
+          <FormGroup>
+            <Label for="username" hidden>
+              Username
+            </Label>
+            <Input
+              type="username"
+              name="username"
+              id="username"
+              placeholder="Username"
+              value={state.username}
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="password" hidden>
+              Password
+            </Label>
+            <Input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              value={state.password}
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <div className="flex-center-x">
+            <Button color="success" type="submit" className="gap-x">
+              Login
+            </Button>
+            <Link className="gap-x" to="/register">
+              <Button type="button">Register</Button>
+            </Link>
+          </div>
+        </Form>
+      </Card>
+    </section>
+  );
+};
 
-export default Login;
+export default connect(null, { login })(Login);

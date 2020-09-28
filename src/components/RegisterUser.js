@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, Form, FormGroup, Label, Input } from 'reactstrap';
+import { register } from '../state/actions';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-const RegisterUser = () => {
+const RegisterUser = (props) => {
   const [state, setState] = useState({
     username: '',
     password: '',
     phoneNumber: '',
   });
 
+  const history = useHistory();
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    props.register(state);
+    history.push('/login');
   };
 
   return (
@@ -74,4 +80,4 @@ const RegisterUser = () => {
   );
 };
 
-export default RegisterUser;
+export default connect(null, { register })(RegisterUser);
